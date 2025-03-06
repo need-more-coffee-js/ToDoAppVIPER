@@ -23,6 +23,7 @@ class TaskListViewController: UIViewController, TaskListViewProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
         setupUI()
         presenter.viewDidLoad()
     }
@@ -47,6 +48,17 @@ class TaskListViewController: UIViewController, TaskListViewProtocol {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+    }
+    
+    private func setupNavigationBar() {
+        // Добавляем кнопку добавления задачи
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
+        navigationItem.rightBarButtonItem = addButton
+    }
+
+    @objc private func addButtonTapped() {
+        // Открываем экран для создания новой задачи
+        presenter.didTapAddButton()
     }
 
     // MARK: - TaskListViewProtocol

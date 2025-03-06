@@ -12,6 +12,7 @@ protocol TaskListPresenterProtocol {
     func searchTasks(with query: String)
     func didFetchTasks(_ tasks: [Task])
     func didDeleteTask(_ task: Task)
+    func didTapAddButton()
 }
 
 class TaskListPresenter: TaskListPresenterProtocol {
@@ -41,5 +42,9 @@ class TaskListPresenter: TaskListPresenterProtocol {
 
     func didDeleteTask(_ task: Task) {
         view.removeTask(task)
+    }
+    
+    func didTapAddButton() {
+        router.navigateToTaskDetail(nil) // Передаем nil для создания новой задачи
     }
 }
