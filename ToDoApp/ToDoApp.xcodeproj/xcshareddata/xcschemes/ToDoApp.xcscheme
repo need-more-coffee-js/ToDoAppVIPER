@@ -29,6 +29,52 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
+      <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C78CF37D2D7A1C5C00E7AF45"
+               BuildableName = "ToDoListTests.xctest"
+               BlueprintName = "ToDoListTests"
+               ReferencedContainer = "container:ToDoApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C78CF38A2D7A1E3000E7AF45"
+               BuildableName = "CoreDataServiceTests.xctest"
+               BlueprintName = "CoreDataServiceTests"
+               ReferencedContainer = "container:ToDoApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C78CF3972D7A1E6F00E7AF45"
+               BuildableName = "TaskListPresenterTests.xctest"
+               BlueprintName = "TaskListPresenterTests"
+               ReferencedContainer = "container:ToDoApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C78CF3A42D7A1EA500E7AF45"
+               BuildableName = "TaskDetailPresenterTests.xctest"
+               BlueprintName = "TaskDetailPresenterTests"
+               ReferencedContainer = "container:ToDoApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
