@@ -28,6 +28,7 @@
 		C71E77382D68C3E400666002 /* TaskDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E77372D68C3E400666002 /* TaskDetailRouter.swift */; };
 		C7312E632D7A220E0067222B /* Pods_ToDoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7312E622D7A220E0067222B /* Pods_ToDoApp.framework */; };
 		C7312E642D7A220E0067222B /* Pods_ToDoApp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C7312E622D7A220E0067222B /* Pods_ToDoApp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C7312E672D7A25590067222B /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7312E662D7A25590067222B /* TaskCell.swift */; };
 		C78CF3812D7A1C5C00E7AF45 /* ToDoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78CF3802D7A1C5C00E7AF45 /* ToDoListTests.swift */; };
 		C78CF3AE2D7A20C900E7AF45 /* CoreDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78CF38D2D7A1E3000E7AF45 /* CoreDataServiceTests.swift */; };
 		C78CF3AF2D7A20D100E7AF45 /* TaskListPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78CF39A2D7A1E6F00E7AF45 /* TaskListPresenterTests.swift */; };
@@ -104,6 +105,7 @@
 		C71E77352D68C3CF00666002 /* TaskDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailInteractor.swift; sourceTree = "<group>"; };
 		C71E77372D68C3E400666002 /* TaskDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailRouter.swift; sourceTree = "<group>"; };
 		C7312E622D7A220E0067222B /* Pods_ToDoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_ToDoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7312E662D7A25590067222B /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		C78CF37E2D7A1C5C00E7AF45 /* ToDoListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C78CF3802D7A1C5C00E7AF45 /* ToDoListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListTests.swift; sourceTree = "<group>"; };
 		C78CF38B2D7A1E3000E7AF45 /* CoreDataServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreDataServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,6 +220,7 @@
 				C71E77332D68C3BC00666002 /* TaskDetailPresenter.swift */,
 				C71E77352D68C3CF00666002 /* TaskDetailInteractor.swift */,
 				C71E77372D68C3E400666002 /* TaskDetailRouter.swift */,
+				C7312E662D7A25590067222B /* TaskCell.swift */,
 			);
 			path = ToDoApp;
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C71E77262D68C31F00666002 /* CoreDataService.swift in Sources */,
+				C7312E672D7A25590067222B /* TaskCell.swift in Sources */,
 				C71E77222D68C2EB00666002 /* CoreDataStack.swift in Sources */,
 				C71E772A2D68C34F00666002 /* TaskListPresenter.swift in Sources */,
 				C71E772E2D68C38000666002 /* TaskListRouter.swift in Sources */,

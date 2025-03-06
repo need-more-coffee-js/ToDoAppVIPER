@@ -13,6 +13,7 @@ protocol TaskListPresenterProtocol {
     func didFetchTasks(_ tasks: [Task])
     func didDeleteTask(_ task: Task)
     func didTapAddButton()
+    func updateTaskStatus(_ task: Task, isCompleted: Bool)
 }
 
 class TaskListPresenter: TaskListPresenterProtocol {
@@ -46,5 +47,10 @@ class TaskListPresenter: TaskListPresenterProtocol {
     
     func didTapAddButton() {
         router.navigateToTaskDetail(nil) // Передаем nil для создания новой задачи
+    }
+    
+    func updateTaskStatus(_ task: Task, isCompleted: Bool) {
+        task.isCompleted = isCompleted
+        interactor.updateTaskStatus(task)
     }
 }

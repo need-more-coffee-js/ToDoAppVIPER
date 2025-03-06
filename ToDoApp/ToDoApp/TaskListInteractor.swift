@@ -10,6 +10,7 @@ protocol TaskListInteractorProtocol{
     func deleteTask(_ task: Task)
     func searchTasks(with query: String)
     func fetchTasks()
+    func updateTaskStatus(_ task: Task)
 }
 
 class TaskListInteractor: TaskListInteractorProtocol {
@@ -55,5 +56,9 @@ class TaskListInteractor: TaskListInteractorProtocol {
         DispatchQueue.main.async {
             self.presenter.didFetchTasks(tasks)
         }
+    }
+    
+    func updateTaskStatus(_ task: Task) {
+        CoreDataStack.shared.saveContext()
     }
 }

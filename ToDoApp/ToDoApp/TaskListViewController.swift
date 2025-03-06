@@ -26,6 +26,7 @@ class TaskListViewController: UIViewController, TaskListViewProtocol {
         setupNavigationBar()
         setupUI()
         presenter.viewDidLoad()
+        tableView.register(TaskCell.self, forCellReuseIdentifier: TaskCell.reuseIdentifier)
     }
 
     private func setupUI() {
@@ -90,12 +91,21 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: TaskCell.reuseIdentifier, for: indexPath) as! TaskCell
         let task = tasks[indexPath.row]
-        cell.textLabel?.text = task.title
-        cell.detailTextLabel?.text = task.isCompleted ? "Completed" : "Not Completed"
+
+        // Настройка ячейки
+        cell.configure(with: task)
+
+        // Обработка изменения статуса
+        cell.onStatusChanged = { [weak self] isCompleted in
+            self?.presenter.updateTaskStatus(task, isCompleted: isCompleted)
+        }
+
         return cell
     }
+
+
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let task = tasks[indexPath.row]
