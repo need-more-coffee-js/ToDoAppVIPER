@@ -27,6 +27,10 @@ class MockTaskListView: TaskListViewProtocol {
 }
 
 class MockTaskListInteractor: TaskListInteractorProtocol {
+    func updateTaskStatus(_ task: ToDoApp.Task) {
+        
+    }
+    
     var fetchTasksCalled = false
     var deleteTaskCalled = false
     var searchTasksCalled = false

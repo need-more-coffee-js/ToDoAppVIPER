@@ -6,32 +6,55 @@
 //
 
 import UIKit
+import SnapKit
 
 class TaskCell: UITableViewCell {
     static let reuseIdentifier = "TaskCell"
 
+    private let circleView = UIView()
+    private let checkmarkImageView = UIImageView()
     private let titleLabel = UILabel()
     private let statusLabel = UILabel()
     private let dateLabel = UILabel()
-    private let statusSwitch = UISwitch()
-
-    var onStatusChanged: ((Bool) -> Void)? // Замыкание для обработки изменения статуса
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
     }
+    
+    var onStatusChanged: ((Bool) -> Void)? //обработка изменения статуса
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     private func setupUI() {
+        circleView.layer.cornerRadius = 15
+        circleView.layer.borderWidth = 1
+        circleView.layer.borderColor = UIColor.lightGray.cgColor
+        contentView.addSubview(circleView)
+        circleView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(16)
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(30)
+        }
+
+
+        checkmarkImageView.image = UIImage(systemName: "checkmark")?.withTintColor(.yellow, renderingMode: .alwaysOriginal)
+        checkmarkImageView.contentMode = .scaleAspectFit
+        checkmarkImageView.isHidden = true
+        circleView.addSubview(checkmarkImageView)
+        checkmarkImageView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.height.equalTo(22)
+        }
+
         // Настройка titleLabel
         titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview().inset(16)
+            make.top.equalToSuperview().inset(16)
+            make.leading.equalTo(circleView.snp.trailing).offset(8)
         }
 
         // Настройка statusLabel
@@ -39,7 +62,7 @@ class TaskCell: UITableViewCell {
         contentView.addSubview(statusLabel)
         statusLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(8)
-            make.leading.equalToSuperview().inset(16)
+            make.leading.equalTo(circleView.snp.trailing).offset(8)
         }
 
         // Настройка dateLabel
@@ -48,26 +71,11 @@ class TaskCell: UITableViewCell {
         contentView.addSubview(dateLabel)
         dateLabel.snp.makeConstraints { make in
             make.top.equalTo(statusLabel.snp.bottom).offset(8)
-            make.leading.equalToSuperview().inset(16)
+            make.leading.equalTo(circleView.snp.trailing).offset(8)
             make.bottom.equalToSuperview().inset(16)
         }
-
-        // Настройка statusSwitch
-        statusSwitch.addTarget(self, action: #selector(statusSwitchChanged), for: .valueChanged)
-        contentView.addSubview(statusSwitch)
-        statusSwitch.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().inset(16)
-        }
     }
-
-    func configure(with task: Task) {
-        titleLabel.text = task.title
-        updateStatusLabel(isCompleted: task.isCompleted)
-        dateLabel.text = "Created: \(formattedDate(task.createdAt))"
-        statusSwitch.isOn = task.isCompleted
-    }
-
+    
     private func formattedDate(_ date: Date?) -> String {
         guard let date = date else { return "N/A" }
         let formatter = DateFormatter()
@@ -76,13 +84,25 @@ class TaskCell: UITableViewCell {
         return formatter.string(from: date)
     }
 
-    @objc private func statusSwitchChanged() {
-        let isCompleted = statusSwitch.isOn
-        updateStatusLabel(isCompleted: isCompleted) // Обновляем текст статуса
-        onStatusChanged?(isCompleted) // Вызываем замыкание для обновления данных
+    func configure(with task: Task) {
+        titleLabel.text = task.title
+        dateLabel.text = formattedDate(task.createdAt)
+        updateCircleView(isCompleted: task.isCompleted)
     }
-
-    private func updateStatusLabel(isCompleted: Bool) {
-        statusLabel.text = isCompleted ? "✅ Completed" : "❌ Not Completed"
+    
+    private func updateCircleView(isCompleted: Bool) {
+        if isCompleted {
+            checkmarkImageView.isHidden = false
+        } else {
+            checkmarkImageView.isHidden = true
+        }
     }
 }
+
+
+
+
+
+
+
+
