@@ -17,6 +17,8 @@ protocol TaskListViewProtocol{
 class TaskListViewController: UIViewController, TaskListViewProtocol {
     var presenter: TaskListPresenterProtocol!
     private var tasks: [Task] = []
+    
+    let taskCard = TaskCardView()
 
     private let tableView = UITableView()
     private let searchBar = UISearchBar()
@@ -45,6 +47,13 @@ class TaskListViewController: UIViewController, TaskListViewProtocol {
             make.top.equalTo(searchBar.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
+        
+        view.addSubview(taskCard)
+        taskCard.snp.makeConstraints { make in
+            make.bottom.equalTo(view.snp.bottomMargin).offset(35)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(100) // Высота карточки
+        }
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -52,13 +61,11 @@ class TaskListViewController: UIViewController, TaskListViewProtocol {
     }
     
     private func setupNavigationBar() {
-        // Добавляем кнопку добавления задачи
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = addButton
     }
 
     @objc private func addButtonTapped() {
-        // Открываем экран для создания новой задачи
         presenter.didTapAddButton()
     }
 
@@ -94,18 +101,13 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: TaskCell.reuseIdentifier, for: indexPath) as! TaskCell
         let task = tasks[indexPath.row]
 
-        // Настройка ячейки
         cell.configure(with: task)
-
-        // Обработка изменения статуса
         cell.onStatusChanged = { [weak self] isCompleted in
             self?.presenter.updateTaskStatus(task, isCompleted: isCompleted)
         }
 
         return cell
     }
-
-
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let task = tasks[indexPath.row]

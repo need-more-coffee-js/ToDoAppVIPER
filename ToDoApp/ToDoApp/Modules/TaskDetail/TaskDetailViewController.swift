@@ -20,28 +20,35 @@ class TaskDetailViewController: UIViewController, TaskDetailViewProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        view.backgroundColor = .white
         presenter.viewDidLoad()
+
+        view.addSubview(titleTextField)
+        view.addSubview(descriptionTextField)
+        view.addSubview(saveButton)
+
+        setupTitleTextField()
+        setupDescriptionTextField()
+        setupSaveButton()
+
+        setupConstraints()
     }
 
-    private func setupUI() {
-        view.backgroundColor = .white
+    private func setupTitleTextField() {
+        titleTextField.placeholder = "Название задачи"
+        titleTextField.borderStyle = .roundedRect
+    }
 
-        titleTextField.placeholder = "Title"
-        descriptionTextField.placeholder = "Description"
-        saveButton.setTitle("Save", for: .normal)
+    private func setupDescriptionTextField() {
+        descriptionTextField.placeholder = "Описание задачи"
+        descriptionTextField.borderStyle = .roundedRect
+    }
+
+    private func setupSaveButton() {
+        saveButton.setTitle("Сохранить", for: .normal)
         saveButton.backgroundColor = .blue
+        saveButton.layer.cornerRadius = 8
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
-
-        let stackView = UIStackView(arrangedSubviews: [titleTextField, descriptionTextField, saveButton])
-        stackView.axis = .vertical
-        stackView.spacing = 16
-
-        view.addSubview(stackView)
-        stackView.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(16)
-        }
     }
 
     @objc private func saveButtonTapped() {
@@ -49,6 +56,28 @@ class TaskDetailViewController: UIViewController, TaskDetailViewProtocol {
         let description = descriptionTextField.text ?? ""
         presenter.saveTask(title: title, description: description)
     }
+
+    private func setupConstraints() {
+        titleTextField.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.left.right.equalToSuperview().inset(20)
+            make.height.equalTo(40)
+        }
+
+        descriptionTextField.snp.makeConstraints { make in
+            make.top.equalTo(titleTextField.snp.bottom).offset(20)
+            make.left.right.equalToSuperview().inset(20)
+            make.height.equalTo(100)
+        }
+
+        saveButton.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(200)
+            make.height.equalTo(50)
+        }
+    }
+
 
     // MARK: - TaskDetailViewProtocol
 
@@ -63,3 +92,7 @@ class TaskDetailViewController: UIViewController, TaskDetailViewProtocol {
         present(alert, animated: true)
     }
 }
+
+
+
+
